@@ -17,10 +17,6 @@ void Read_data::fill_col(){
 
 void Read_data::fill_matrix(){
     int col{0},iters{0};
-    //Eigen::Matrix<double,_n_rows,_n_cols> Matrix;
-    _data.setZero();
-    std::vector<double> _mean(_n_cols,0);
-    std::vector<double> _variance(_n_cols,0);
     std::ifstream file(_file_name);
     double num;
     if(file.is_open()){
@@ -33,7 +29,7 @@ void Read_data::fill_matrix(){
                 while(linestream>>num){
                     _data(iters-1,col) = num;
                     _mean[col] += num;
-                    variance[col] += num*num;
+                    _variance[col] += num*num;
                     col++;
                 }
                 std::cout << std::endl;
@@ -50,16 +46,18 @@ void Read_data::fill_matrix(){
         _variance[i] = _variance[i]/_n_rows - _mean[i]*_mean[i];
     }
     for(int i = 0; i<_n_cols; i++){
-        _data.col(i) -= _mean[i];
+        Eigen::MatrixXd ones(_n_rows,1);
+        ones.fill(1.0);
+        _data.col(i) -=  ones*_mean[i];
         _data.col(i) /= _variance[i];
     }
     std::cout << " Data has been read and processed for the " << _file_name << ". " << std::endl;
 }
 
-Read_data::Read_data(const std::string name, const int rows, const int cols) : _file_name{name}, _n_rows{rows}, _n_cols{cols}{
-    
-    Read_data::fill_col;
-    Read_data::fill_matrix;
+Read_data::Read_data(const std::string name, const int rows, const int cols) : _file_name{name}, _n_rows{rows}, _n_cols{cols}, _mean(cols,0),_variance(cols,0){
+    _data.resize(_n_rows,_n_cols);
+    Read_data::fill_col();
+    Read_data::fill_matrix();
 }
 
 Eigen::Matrix<double,n_rows,n_cols> Read_data::get_data(){
