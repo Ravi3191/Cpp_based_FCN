@@ -15,6 +15,8 @@ public:
     std::vector<std::string> get_names();
     void fill_matrix();
     void fill_col();
+    void normalize(vector<double> mean,vector<double> variance);
+    void normalize();
     Eigen::Matrix<double,_n_rows,_n_cols> get_data();
 
 

@@ -45,13 +45,25 @@ void Read_data::fill_matrix(){
     for(int i = 0; i<_n_cols; i++){
         _variance[i] = _variance[i]/_n_rows - _mean[i]*_mean[i];
     }
+
+    std::cout << " Data has been read and processed for the " << _file_name << ". " << std::endl;
+}
+
+void normalize(vector<double> mean,vector<double> variance){
+    for(int i = 0; i<_n_cols; i++){
+        Eigen::MatrixXd ones(_n_rows,1);
+        ones.fill(1.0);
+        _data.col(i) -=  ones*mean[i];
+        _data.col(i) /= variance[i];
+    }
+}
+void normalize(){
     for(int i = 0; i<_n_cols; i++){
         Eigen::MatrixXd ones(_n_rows,1);
         ones.fill(1.0);
         _data.col(i) -=  ones*_mean[i];
         _data.col(i) /= _variance[i];
     }
-    std::cout << " Data has been read and processed for the " << _file_name << ". " << std::endl;
 }
 
 Read_data::Read_data(const std::string name, const int rows, const int cols) : _file_name{name}, _n_rows{rows}, _n_cols{cols}, _mean(cols,0),_variance(cols,0){
