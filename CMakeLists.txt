@@ -21,8 +21,10 @@ add_library(relu src/relu.cpp)
 target_link_libraries (relu Eigen3::Eigen)
 add_library(sig src/sigmoid.cpp)
 target_link_libraries (sig m Eigen3::Eigen)
- 
+add_libarary(model src/model.cpp)
+target_link_libraries (sig relu ll bce Eigen3::Eigen)
+
 add_executable (ab src/main.cpp)
-target_link_libraries (ab Eigen3::Eigen ll csv relu sig)
+target_link_libraries (ab Eigen3::Eigen model)
 
 

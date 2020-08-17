@@ -8,8 +8,9 @@
 class Bce_Loss{
     public:
         Bce_Loss();
-        void forward(Eigen::MatrixXd ground_truth, Eigen::MatrixXd predictions);
+        void forward(const Eigen::MatrixXd &ground_truth, Eigen::MatrixXd &predictions);
         Eigen::MatrixXd backward();
+        double get_loss();
     private:
         double _loss;
         int _size;

@@ -2,7 +2,7 @@
 
 Bce_Loss::Bce_Loss() : _loss{0}, _size{0} {}
 
-void Bce_Loss::forward(Eigen::MatrixXd ground_truth, Eigen::MatrixXd predictions){
+void Bce_Loss::forward(const Eigen::MatrixXd &ground_truth, Eigen::MatrixXd &predictions){
     _size = ground_truth.rows();
     _gt = ground_truth;
     _loss_vector.resize(_size,1);
@@ -38,3 +38,5 @@ Eigen::MatrixXd Bce_Loss::backward(){
     }  
     return grad;
 }
+
+double Bce_Loss::get_loss() {return _loss;}
