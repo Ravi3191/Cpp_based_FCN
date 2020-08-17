@@ -5,10 +5,10 @@ void Read_data::fill_col(){
     std::string line,name;
     std::ifstream file(_file_name);
     if(file.is_open()){
-        std::getline(filestream, line);
+        std::getline(file, line);
         std::replace(line.begin(), line.end(), ',', ' ');
         std::istringstream linestream(line);
-        while(line>>name){
+        while(linestream >> name){
             _col_names.push_back(name);
         }
     }
@@ -17,6 +17,7 @@ void Read_data::fill_col(){
 
 void Read_data::fill_matrix(){
     int col{0},iters{0};
+    std::string line;
     std::ifstream file(_file_name);
     double num;
     if(file.is_open()){
@@ -49,7 +50,7 @@ void Read_data::fill_matrix(){
     std::cout << " Data has been read and processed for the " << _file_name << ". " << std::endl;
 }
 
-void normalize(vector<double> mean,vector<double> variance){
+void Read_data::normalize(std::vector<double> mean,std::vector<double> variance){
     for(int i = 0; i<_n_cols; i++){
         Eigen::MatrixXd ones(_n_rows,1);
         ones.fill(1.0);
@@ -57,7 +58,8 @@ void normalize(vector<double> mean,vector<double> variance){
         _data.col(i) /= variance[i];
     }
 }
-void normalize(){
+
+void Read_data::normalize(){
     for(int i = 0; i<_n_cols; i++){
         Eigen::MatrixXd ones(_n_rows,1);
         ones.fill(1.0);
@@ -72,7 +74,7 @@ Read_data::Read_data(const std::string name, const int rows, const int cols) : _
     Read_data::fill_matrix();
 }
 
-Eigen::Matrix<double,n_rows,n_cols> Read_data::get_data(){
+Eigen::MatrixXd Read_data::get_data(){
     return _data;
 }
 

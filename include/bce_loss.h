@@ -2,8 +2,8 @@
 #define BCE_LOSS
 
 #include <iostream>
-#include <Eigen/Dense>
-#include <math>
+#include <Eigen/Core>
+#include <math.h>
 
 class Bce_Loss{
     public:
@@ -13,6 +13,7 @@ class Bce_Loss{
     private:
         double _loss;
         int _size;
+        Eigen::MatrixXd _loss_vector,_gt;
 };
 
 #endif

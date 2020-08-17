@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include <Eigen/Dense>
+#include <Eigen/Core>
 
 class Read_data{
 public:
@@ -15,9 +15,9 @@ public:
     std::vector<std::string> get_names();
     void fill_matrix();
     void fill_col();
-    void normalize(vector<double> mean,vector<double> variance);
+    void normalize(std::vector<double> mean,std::vector<double> variance);
     void normalize();
-    Eigen::Matrix<double,_n_rows,_n_cols> get_data();
+    Eigen::MatrixXd get_data();
 
 
 private:
@@ -27,7 +27,7 @@ private:
     std::vector<double> _variance;
     const int _n_rows;
     const int _n_cols;
-    Eigen::Matrix<double,n_rows,n_cols> _data;
+    Eigen::MatrixXd _data;
 };
 
 #endif
