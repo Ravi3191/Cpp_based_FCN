@@ -14,15 +14,16 @@
 class Model{
 public:
     Model();
+    //~Model(){}
     void forward();
     void backward();
     double calculate_loss();
     Eigen::MatrixXd get_predictions(Eigen::MatrixXd data);
-    double train(int epochs, Eigen::MatrixXd &input);
+    double train(int epochs, Eigen::MatrixXd &input, Eigen::MatrixXd &gt);
     
 private:
-    vector<std::unique_ptr<fcn_operations>> _model;
-    bce_loss _criterion;
+    std::vector<std::unique_ptr<fcn_operations>> _model;
+    Bce_Loss _criterion;
     Eigen::MatrixXd _data, _ground_truth, _predictions;
     double _loss;
 

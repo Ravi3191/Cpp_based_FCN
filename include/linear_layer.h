@@ -12,9 +12,15 @@ public:
     Linear_Layer(int input_channels, int output_channels);
     Eigen::MatrixXd forward(Eigen::MatrixXd &input);
     Eigen::MatrixXd backward(Eigen::MatrixXd &grad_output);
+    ~Linear_Layer();
+    Linear_Layer (const Linear_Layer&) = delete;
+    Linear_Layer& operator= (const Linear_Layer&) = delete;
+    Linear_Layer (Linear_Layer &&layer); //move constructor
+    Linear_Layer &operator=(Linear_Layer &&layer); //move assignment
 private:
 
-    Eigen::MatrixXd _weights,_bias,_input, _grad_input, _grad_bias, _grad_weights;
+    Eigen::MatrixXd *_weights = new Eigen::MatrixXd, *_bias = new Eigen::MatrixXd, *_input = new Eigen::MatrixXd,\
+     *_grad_input = new Eigen::MatrixXd, *_grad_bias = new Eigen::MatrixXd, *_grad_weights = new Eigen::MatrixXd;
 };
 
 #endif
