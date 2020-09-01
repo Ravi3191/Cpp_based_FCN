@@ -33,7 +33,7 @@ void Read_data::fill_matrix(){
                     _variance[col] += num*num;
                     col++;
                 }
-                std::cout << std::endl;
+                //std::cout << std::endl;
             }
             iters++; 
     }

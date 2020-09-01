@@ -24,6 +24,7 @@
     }
 
     Eigen::MatrixXd Relu::forward(Eigen::MatrixXd &input){
+        _input->resize(input.rows(),input.cols());
         *_input = input;
         input = (input.array()<0).select(0,input);
         return input;

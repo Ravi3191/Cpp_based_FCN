@@ -2,6 +2,7 @@
 #define RELU
 
 #include <Eigen/Core>
+#include <iostream>
 #include <fcn_operations.h>
 
 class Relu : public fcn_operations{

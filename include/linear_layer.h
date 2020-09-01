@@ -19,8 +19,12 @@ public:
     Linear_Layer &operator=(Linear_Layer &&layer); //move assignment
 private:
 
-    Eigen::MatrixXd *_weights = new Eigen::MatrixXd, *_bias = new Eigen::MatrixXd, *_input = new Eigen::MatrixXd,\
-     *_grad_input = new Eigen::MatrixXd, *_grad_bias = new Eigen::MatrixXd, *_grad_weights = new Eigen::MatrixXd;
+    Eigen::MatrixXd *_weights = new Eigen::MatrixXd;
+    Eigen::MatrixXd *_bias = new Eigen::MatrixXd;
+    Eigen::MatrixXd *_input = new Eigen::MatrixXd;
+    Eigen::MatrixXd *_grad_input = new Eigen::MatrixXd;
+    Eigen::MatrixXd *_grad_bias = new Eigen::MatrixXd;
+    Eigen::MatrixXd *_grad_weights = new Eigen::MatrixXd;
 };
 
 #endif

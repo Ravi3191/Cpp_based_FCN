@@ -10,7 +10,7 @@ virtual Eigen::MatrixXd getPredictions() {return Eigen::MatrixXd(1,1);}
 virtual ~fcn_operations(){}
 
 protected:
-const float _lr{0.01};
+const float _lr{0.0001};
 
 };
 

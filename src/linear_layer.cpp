@@ -1,10 +1,11 @@
 #include "linear_layer.h"
 
 Linear_Layer::Linear_Layer(int input_channels, int output_channels){
+
     _weights->resize(input_channels,output_channels);
-    _weights->Random();
+    *_weights =  Eigen::MatrixXd::Random(input_channels,output_channels);
     *_weights += Eigen::MatrixXd::Constant(input_channels,output_channels,1.);
-    *_weights *= std::sqrt(2/(input_channels+output_channels))/2; 
+    *_weights = (std::sqrt(2.0/(input_channels+output_channels))/2.0)*(*_weights); 
     _bias->resize(output_channels,1);
     _bias->setZero();
 
@@ -20,12 +21,12 @@ Eigen::MatrixXd Linear_Layer::forward(Eigen::MatrixXd &input){
 }
 
 Eigen::MatrixXd Linear_Layer::backward(Eigen::MatrixXd &grad_output){
+
     *_grad_input = grad_output*(_weights->transpose());
     *_grad_bias = grad_output.colwise().sum();
     *_grad_weights = (_input->transpose())*grad_output;
-    *_weights += _lr*(*_grad_weights);
-    *_bias += _lr*(*_grad_bias);
-
+    *_weights -= _lr*(*_grad_weights);
+    *_bias -= _lr*(_grad_bias->transpose());
     return *_grad_input;
 }
 

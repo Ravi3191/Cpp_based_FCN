@@ -26,12 +26,23 @@
 
     Eigen::MatrixXd Sigmoid::forward(Eigen::MatrixXd &input){
         for(int i=0; i<input.rows(); i++){
-            input(i,0) = 1/(1+std::exp(-input(i,0)));
+            input(i,0) = 1.0/(1.0+std::exp(-input(i,0)));
         }
         *_sigmoid = input;
         return input;
     }
+
     Eigen::MatrixXd Sigmoid::backward(Eigen::MatrixXd &grad_matrix){
-     return (_sigmoid->array()*(1-_sigmoid->array())*grad_matrix.array()).matrix();
+        Eigen::MatrixXd temp = (_sigmoid->array()*(1-_sigmoid->array())*grad_matrix.array()).matrix();
+     return temp;
     }
-    Eigen::MatrixXd Sigmoid::getPredictions() {return *_sigmoid;}
+
+    Eigen::MatrixXd Sigmoid::getPredictions() {
+        Eigen::MatrixXd pred_array = *_sigmoid;
+        for (int i = 0; i < pred_array.rows(); i++){
+            if(pred_array(i,0) > 0.5) {pred_array(i,0) = 1.0;}
+            else pred_array(i,0) = 0.0;
+        }
+        return pred_array;
+    }
+    
