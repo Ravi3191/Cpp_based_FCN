@@ -26,7 +26,7 @@ target_link_libraries (model sig relu ll bce Eigen3::Eigen)
 add_library(parser src/read_csv.cpp)
 target_link_libraries (parser Eigen3::Eigen)
 
-add_executable (train src/main.cpp)
+add_executable (train src/train.cpp)
 target_link_libraries (train Eigen3::Eigen model parser)
 
 
