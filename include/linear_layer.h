@@ -9,7 +9,7 @@
 class Linear_Layer : public fcn_operations{
 
 public:
-    Linear_Layer(int input_channels, int output_channels);
+    Linear_Layer(int input_channels, int output_channels, double lr);
     Eigen::MatrixXd forward(Eigen::MatrixXd &input);
     Eigen::MatrixXd backward(Eigen::MatrixXd &grad_output);
     ~Linear_Layer();
@@ -19,6 +19,7 @@ public:
     Linear_Layer &operator=(Linear_Layer &&layer); //move assignment
 private:
 
+    double _lr;
     Eigen::MatrixXd *_weights = new Eigen::MatrixXd;
     Eigen::MatrixXd *_bias = new Eigen::MatrixXd;
     Eigen::MatrixXd *_input = new Eigen::MatrixXd;

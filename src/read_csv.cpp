@@ -47,7 +47,7 @@ void Read_data::fill_matrix(){
         _variance[i] = _variance[i]/_n_rows - _mean[i]*_mean[i];
     }
 
-    std::cout << " Data has been read and processed for the " << _file_name << ". " << std::endl;
+    std::cout << "Data has been read and processed for the " << _file_name << ". " << std::endl;
 }
 
 void Read_data::normalize(std::vector<double> mean,std::vector<double> variance){

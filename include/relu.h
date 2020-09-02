@@ -8,7 +8,7 @@
 class Relu : public fcn_operations{
     public:
         //Relu(int w, int h);
-        Relu(){}
+        Relu(){} // constuctor 
         Eigen::MatrixXd forward(Eigen::MatrixXd &input);
         Eigen::MatrixXd backward(Eigen::MatrixXd &grad_input);
         ~Relu();

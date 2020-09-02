@@ -7,9 +7,9 @@
 
 class Bce_Loss{
     public:
-        Bce_Loss();
-        void forward(const Eigen::MatrixXd &ground_truth, Eigen::MatrixXd &predictions);
-        Eigen::MatrixXd backward();
+        Bce_Loss(); // constructor
+        void forward(const Eigen::MatrixXd &ground_truth, Eigen::MatrixXd &predictions); // forward function to calculate loss.
+        Eigen::MatrixXd backward(); // propagates loss backwards.
         double get_loss();
         ~Bce_Loss(){}
         Bce_Loss (const Bce_Loss&) = delete;

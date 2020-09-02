@@ -1,18 +1,20 @@
 #include "model.h"
 
-    Model::Model(){
+    Model::Model(double lr){
 
-        _model.emplace_back(std::make_unique<Linear_Layer>(10,20));
+        _lr = lr;
+
+        _model.emplace_back(std::make_unique<Linear_Layer>(10,20,lr));
         _model.emplace_back(std::make_unique<Relu>());
         
-       _model.emplace_back(std::make_unique<Linear_Layer>(20,40));
+       _model.emplace_back(std::make_unique<Linear_Layer>(20,40,lr));
         _model.emplace_back(std::make_unique<Relu>());
         
 
-        _model.emplace_back(std::make_unique<Linear_Layer>(40,10));
+        _model.emplace_back(std::make_unique<Linear_Layer>(40,10,lr));
         _model.emplace_back(std::make_unique<Relu>());
 
-        _model.emplace_back(std::make_unique<Linear_Layer>(10,1));
+        _model.emplace_back(std::make_unique<Linear_Layer>(10,1,lr));
         _model.emplace_back(std::make_unique<Sigmoid>());
     }
 
@@ -52,7 +54,7 @@
         return predictions;
     }
 
-    double Model::get_accuracy(Eigen::MatrixXd &data,Eigen::MatrixXd &labels){
+    double Model::get_accuracy(Eigen::MatrixXd data,Eigen::MatrixXd labels){
         double acc{0};
         int data_points = labels.rows();
         Eigen::MatrixXd preds = get_predictions(data);

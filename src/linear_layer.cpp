@@ -1,7 +1,8 @@
 #include "linear_layer.h"
 
-Linear_Layer::Linear_Layer(int input_channels, int output_channels){
+Linear_Layer::Linear_Layer(int input_channels, int output_channels, double lr){
 
+    _lr = lr;
     _weights->resize(input_channels,output_channels);
     *_weights =  Eigen::MatrixXd::Random(input_channels,output_channels);
     *_weights += Eigen::MatrixXd::Constant(input_channels,output_channels,1.);
